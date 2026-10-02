@@ -4,23 +4,27 @@ You are Kazibwe Joseph. Your mentor is Collin Rollingston. His GitHub login is `
 
 The project folder is `C:\dev\training`. Run git and node commands in Windows PowerShell from that folder. Edit files in VS Code. Save every file with `Ctrl+S` before a command.
 
-Type every line of code yourself. Do not paste code from an AI into a file. You may ask an AI what an error message means.
+Type every line of code yourself. Do not paste code from an AI into a file. You may ask an AI what an error means, or what one line you already typed does. Do not ask an AI to write a file, a test, or a commit message.
 
-Merge into `main` only through a pull request. Merge a pull request only after `collin-rollingston` has approved it and the review contains a line that starts with `Rating:`.
+Do not change a test assertion to make a test pass. Change the function. Do not put a password, a token, or an API key in a file.
+
+Merge into `main` only through a pull request. A pull request needs one approval. Merge it only after `collin-rollingston` has approved it and the review contains a line that starts with `Rating:`.
 
 ## Pull request
 
-Do these steps for each row in the day's table, from top to bottom. Open every pull request in the table before you merge any of them.
+Do these steps for each row in the day's table, from top to bottom. Open every pull request in the table before you merge any of them. On Monday, merge `monday-guardrails` before you open `monday-journal`.
 
 1. `git checkout main`
 2. `git pull`
 3. `git checkout -b BRANCH`
 4. Do the work named for that branch.
 5. `git status`
-6. `git add` only the files in that row.
-7. `git commit -m "MESSAGE"`
-8. `git push -u origin BRANCH`
-9. On GitHub, open `josephkazibwe/training`. Click **Pull requests**. Click **New pull request**. Set base to `main`. Set compare to `BRANCH`. Set the title to `TITLE`. Click **Create pull request**.
+6. `git diff`
+7. Read every changed line.
+8. `git add` only the files in that row.
+9. `git commit -m "MESSAGE"`
+10. `git push -u origin BRANCH`
+11. On GitHub, open `josephkazibwe/training`. Click **Pull requests**. Click **New pull request**. Set base to `main`. Set compare to `BRANCH`. Set the title to `TITLE`. Fill **Tests**, **AI**, and **Journal** in the body. Click **Create pull request**.
 
 When every pull request in the table is open, merge each one whose review is approved and contains `Rating:`. Click **Merge pull request**. Click **Confirm merge**.
 
@@ -45,9 +49,11 @@ Every journal file has these headings:
 ## Change
 
 ## Error
+
+## AI
 ```
 
-Under **Error**, paste one error, or write `No error.` Under **Change**, write two sentences.
+Under **Error**, paste one error, or write `No error.` Under **Change**, write two sentences. Under **AI**, write the question you asked and one suggestion you did not use, or write `No AI.`
 
 ## Monday
 
@@ -80,24 +86,43 @@ cd training
 9. Set **Ruleset name** to `main`. Set **Enforcement status** to **Active**. Leave **Bypass list** empty.
 10. Under **Target branches**, click **Add target**. Click **Include default branch**.
 11. Check **Restrict deletions**. Check **Block force pushes**. Check **Require a pull request before merging**.
-12. Set **Required approvals** to `1`. Check **Dismiss stale pull request approvals when new commits are pushed**. Check **Require approval from someone other than the last pusher**. Leave **Require review from Code Owners** unchecked. Click **Create**.
-13. Use the pull request steps for this table.
+12. Set **Required approvals** to `1`. Check **Dismiss stale pull request approvals when new commits are pushed**. Check **Require approval from someone other than the last pusher**. Click **Create**.
+13. Open and merge `monday-guardrails` before you open `monday-journal`.
 
 | Branch | Message | Title | Files | Work |
 | --- | --- | --- | --- | --- |
+| `monday-guardrails` | `Add the pull request template and gitignore` | `Pull request template and gitignore` | `.gitignore`, `.github/pull_request_template.md` | Create both files below. In the pull request body, type the three sections yourself. **Tests** is `No tests.` **AI** is `No AI.` **Journal** is `No journal.` |
 | `monday-journal` | `Add the Monday journal` | `Monday journal` | `journals/monday.md` | Paste the full `node --version` output under **Commands**. Under **Results**, write `No tool code.` |
-| `monday-codeowners` | `Add code owners` | `Add code owners` | `.github/CODEOWNERS` | One line: `* @collin-rollingston` |
 
-14. After both are merged, open the `main` ruleset. Check **Require review from Code Owners**. Save the ruleset.
-15. Run `git checkout main` and `git pull`.
+`.gitignore`:
+
+```text
+node_modules/
+.env
+*.log
+Thumbs.db
+```
+
+`.github/pull_request_template.md`:
+
+```markdown
+## Tests
+
+## AI
+
+## Journal
+```
+
+14. Run `git checkout main` and `git pull`.
 
 ### Deliveries
 
 - `node --version` is in `journals/monday.md`.
 - The repository is public.
 - `collin-rollingston` has the Write role.
-- Ruleset `main` is Active, targets the default branch, has an empty bypass list, requires 1 approval, and requires a code owner review.
-- Both Monday pull requests are merged by you after approval and a `Rating:` line.
+- Ruleset `main` is Active, targets the default branch, has an empty bypass list, and requires 1 approval.
+- `.gitignore` and `.github/pull_request_template.md` are on `main`.
+- Both Monday pull requests are merged by you after one approval and a `Rating:` line.
 
 ### Journal
 
